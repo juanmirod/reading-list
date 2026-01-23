@@ -3,10 +3,14 @@ import pytest
 from podcast.git_ops import git_add, git_commit, git_push, commit_episode
 
 def test_git_add(mocker):
-    """Should run git add with correct paths"""
+    """Should run git add with -f flag to handle ignored files.
+    
+    Audio files may be in .gitignore during development, but the
+    publish tool needs to commit them. Using -f ensures this works.
+    """
     mock_run = mocker.patch("subprocess.run")
     git_add(["file1", "file2"])
-    mock_run.assert_called_once_with(["git", "add", "file1", "file2"], check=True)
+    mock_run.assert_called_once_with(["git", "add", "-f", "file1", "file2"], check=True)
 
 def test_git_commit(mocker):
     """Should run git commit with message"""

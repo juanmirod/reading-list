@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>Reading list</title>
+    <link>https://juanmirod.github.io/reading-list</link>
+    <language>en-us</language>
+    <itunes:author>juanmirod</itunes:author>
+    <description>Articles and papers to listen to</description>
+    <itunes:type>episodic</itunes:type>
+    <itunes:image href="https://juanmirod.github.io/public/img/logo.png" />
+    <itunes:category text="Technology" />
+    
+    <item>
+      <title>Who am I?</title>
+      <itunes:title>Who am I?</itunes:title>
+      <description><![CDATA[An LLM has an existential crysis answering a simple question]]></description>
+      <content:encoded><![CDATA[An LLM has an existential crysis answering a simple question]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20260123-233753-who-am-i.mp3" 
+        length="2161005" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">a05d43fc-70a4-4d19-8504-12a5d1d2ec0f</guid>
+      <pubDate>Fri, 23 Jan 2026 23:37:53 +0000</pubDate>
+      <itunes:duration>540</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    
+  </channel>
+</rss>

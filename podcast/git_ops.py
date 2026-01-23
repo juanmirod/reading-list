@@ -1,7 +1,7 @@
 import subprocess
 
 def git_add(paths):
-    subprocess.run(["git", "add"] + paths, check=True)
+    subprocess.run(["git", "add", "-f"] + paths, check=True)
 
 def git_commit(message):
     subprocess.run(["git", "commit", "-m", message], check=True)
