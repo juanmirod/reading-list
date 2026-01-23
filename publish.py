@@ -31,6 +31,14 @@ def main(argv=None):
     # 1. Get input text
     text = get_input_text(args.file)
     
+    # Re-open /dev/tty for interactive input if stdin was a pipe
+    if not sys.stdin.isatty():
+        try:
+            sys.stdin = open('/dev/tty')
+        except (OSError, IOError):
+            # Fallback if /dev/tty is not available (e.g. in some CI environments)
+            pass
+
     # 2. Get metadata (interactive if not provided)
     title = args.title
     if not title:
