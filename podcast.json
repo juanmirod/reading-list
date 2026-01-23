@@ -1,0 +1,8 @@
+{
+  "title": "My Podcast",
+  "author": "Author Name",
+  "description": "A podcast about things.",
+  "image": "https://example.com/podcast.png",
+  "base_url": "https://username.github.io/repo-name",
+  "language": "en-us"
+}
