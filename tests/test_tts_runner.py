@@ -56,7 +56,8 @@ def test_run_tts_success(mocker):
     
     output_path = run_tts("Hello", voice="alloy", tts_dir="tts")
     
-    assert output_path == "output.mp3"
+    # TTS tool modifies output filename to include voice name
+    assert output_path == "output_alloy.mp3"
     mock_run.assert_called_once()
     args = mock_run.call_args[0][0]
     assert any("python" in arg for arg in args)
@@ -66,21 +67,35 @@ def test_run_tts_success(mocker):
 
 
 def test_run_tts_passes_output_flag(mocker):
-    """run_tts should pass -o output.mp3 to the TTS command.
+    """run_tts should pass -o flag and expect output_{voice}.mp3.
     
-    Bug: TTS tool creates tmp/tts_{timestamp}_{voice}.mp3 by default,
-    but run_tts expects output.mp3. Must pass -o flag explicitly.
+    Bug: TTS tool modifies output filename to include voice name,
+    e.g. output.mp3 becomes output_onyx.mp3. run_tts must account for this.
     """
     mock_run = mocker.patch("subprocess.run")
     mocker.patch("os.path.exists", return_value=True)
     
-    run_tts("Hello", voice="onyx", tts_dir="tts")
+    result = run_tts("Hello", voice="onyx", tts_dir="tts")
     
     args = mock_run.call_args[0][0]
-    # Check that -o and output.mp3 are in the command
+    # Check that -o flag is passed
     assert "-o" in args, "run_tts must pass -o flag to specify output file"
-    output_index = args.index("-o")
-    assert args[output_index + 1] == "output.mp3", "Output file should be output.mp3"
+    # The actual output file will be output_{voice}.mp3
+    assert result == "output_onyx.mp3", "Output file should include voice name"
+
+
+def test_run_tts_dry_run_mode(mocker):
+    """run_tts should support dry_run mode that doesn't call OpenAI API.
+    
+    This passes -d flag to TTS tool which prints chunks without API calls.
+    """
+    mock_run = mocker.patch("subprocess.run")
+    mocker.patch("os.path.exists", return_value=True)
+    
+    run_tts("Hello", voice="onyx", tts_dir="tts", dry_run=True)
+    
+    args = mock_run.call_args[0][0]
+    assert "-d" in args, "run_tts must pass -d flag for dry run mode"
 
 def test_move_audio_to_docs(tmp_path):
     """Should move mp3 file to docs/audio/ with new name"""

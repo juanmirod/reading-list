@@ -3,7 +3,7 @@ import subprocess
 import shutil
 from mutagen.mp3 import MP3
 
-def run_tts(text, voice="alloy", tts_dir="tts"):
+def run_tts(text, voice="alloy", tts_dir="tts", dry_run=False):
     # Create a temporary text file for input
     temp_text_file = "tmp_input.txt"
     with open(temp_text_file, "w") as f:
@@ -11,8 +11,13 @@ def run_tts(text, voice="alloy", tts_dir="tts"):
     
     # Run the tts module
     # Command: python -m tts.tts -v <voice> -o output.mp3 <temp_text_file>
-    output_file = "output.mp3"
-    cmd = ["python3", "-m", "tts.tts", "-v", voice, "-o", output_file, temp_text_file]
+    # Note: TTS tool modifies output filename to output_{voice}.mp3
+    output_base = "output.mp3"
+    output_file = output_base.replace(".mp3", f"_{voice}.mp3")
+    cmd = ["python3", "-m", "tts.tts", "-v", voice, "-o", output_base, temp_text_file]
+    
+    if dry_run:
+        cmd.insert(4, "-d")  # Insert -d flag after -v voice
     
     # We need to make sure we are running from the root where tts/ is a package
     # or add tts_dir to PYTHONPATH
@@ -23,9 +28,13 @@ def run_tts(text, voice="alloy", tts_dir="tts"):
     
     if os.path.exists(temp_text_file):
         os.remove(temp_text_file)
+    
+    # In dry_run mode, no output file is produced
+    if dry_run:
+        return None
         
     if not os.path.exists(output_file):
-        raise FileNotFoundError("TTS tool did not produce output.mp3")
+        raise FileNotFoundError(f"TTS tool did not produce {output_file}")
         
     return output_file
 

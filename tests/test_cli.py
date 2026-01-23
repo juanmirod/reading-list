@@ -19,6 +19,38 @@ def test_parse_args_no_push():
     args = parse_args(["--no-push", "input.txt"])
     assert args.push is False
 
+
+def test_parse_args_dry_run():
+    """Should parse --dry-run flag"""
+    args = parse_args(["--dry-run", "input.txt"])
+    assert args.dry_run is True
+
+
+def test_dry_run_skips_audio_processing(mocker):
+    """Dry run should call TTS with dry_run=True and skip audio/git steps.
+    
+    This allows testing the TTS parsing without hitting OpenAI API.
+    """
+    mocker.patch("publish.get_input_text", return_value="Text")
+    mocker.patch("publish.load_podcast_config", return_value={})
+    mocker.patch("publish.load_episodes", return_value=[])
+    m_run_tts = mocker.patch("publish.run_tts", return_value=None)
+    m_move = mocker.patch("publish.move_audio_to_docs")
+    m_commit = mocker.patch("publish.commit_episode")
+    
+    mocker.patch("builtins.input", side_effect=["Title", "Desc", "alloy"])
+    
+    main(["--dry-run", "input.txt"])
+    
+    # Should call run_tts with dry_run=True
+    m_run_tts.assert_called_once()
+    call_kwargs = m_run_tts.call_args[1]
+    assert call_kwargs.get("dry_run") is True, "run_tts should be called with dry_run=True"
+    
+    # Should skip audio processing and git
+    m_move.assert_not_called()
+    m_commit.assert_not_called()
+
 def test_main_flow(mocker):
     """Should orchestrate all steps in correct order"""
     # Mock all dependencies

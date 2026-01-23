@@ -22,7 +22,9 @@ def parse_args(args):
     parser.add_argument("-v", "--voice", help="Voice selection")
     parser.add_argument("--no-push", dest="push", action="store_false", help="Skip git push")
     parser.add_argument("--no-commit", dest="commit", action="store_false", help="Skip git commit")
-    parser.set_defaults(push=True, commit=True)
+    parser.add_argument("--dry-run", dest="dry_run", action="store_true", 
+                        help="Test TTS parsing without calling OpenAI API")
+    parser.set_defaults(push=True, commit=True, dry_run=False)
     return parser.parse_args(args)
 
 def main(argv=None):
@@ -57,8 +59,16 @@ def main(argv=None):
     episodes = load_episodes("episodes.json")
     
     # 4. Run TTS
-    print(f"Converting text to speech with voice '{voice}'...")
-    output_mp3 = run_tts(text, voice=voice)
+    if args.dry_run:
+        print(f"[DRY RUN] Testing TTS parsing with voice '{voice}'...")
+    else:
+        print(f"Converting text to speech with voice '{voice}'...")
+    output_mp3 = run_tts(text, voice=voice, dry_run=args.dry_run)
+    
+    # In dry_run mode, skip audio processing and downstream steps
+    if args.dry_run:
+        print("[DRY RUN] Complete. No API calls made, no files generated.")
+        return
     
     # 5. Process audio
     duration = get_audio_duration(output_mp3)
