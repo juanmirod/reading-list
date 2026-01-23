@@ -1,0 +1,72 @@
+---
+description: TDD workflow for all code changes in this project
+alwaysApply: true
+---
+
+# Test-Driven Development Workflow
+
+All code changes in this project MUST follow the TDD Red-Green-Refactor cycle.
+
+## The Cycle
+
+```
+1. RED:      Write a failing test first
+2. GREEN:   Write the minimum code to make the test pass
+3. REFACTOR: Clean up and simplify, keeping tests green
+4. COMMIT:   One commit per cycle with descriptive message
+```
+
+## Implementation Steps
+
+### 1. RED - Write Failing Test
+- Create test file in `tests/` if it doesn't exist
+- Write test(s) that describe the expected behavior
+- Run `pytest tests/test_<module>.py` to confirm the test fails
+- Tests should fail with `ModuleNotFoundError` or assertion errors
+
+### 2. GREEN - Make It Pass
+- Write the minimum implementation in `podcast/` module
+- Run `pytest tests/test_<module>.py` to confirm tests pass
+- Do NOT add extra functionality beyond what the test requires
+
+### 3. REFACTOR - Clean Up
+- Simplify code while keeping tests green
+- Remove duplication
+- Improve naming
+- Run `pytest` to ensure all tests still pass
+
+### 4. COMMIT - Single Commit
+One commit per complete cycle:
+
+```
+feat(<module>): <what the feature does>
+
+<Description of the change and why>
+```
+
+## Bug Fixes
+
+When fixing a bug, follow the same cycle:
+
+1. **Write a test that reproduces the bug** (should fail)
+2. **Fix the bug** (test should pass)
+3. **Refactor if needed**
+4. **Commit with `fix(<module>):` prefix**
+
+## Running Tests
+
+```bash
+source venv/bin/activate
+pytest                          # All tests
+pytest tests/test_<module>.py   # Specific module
+pytest -v                       # Verbose output
+```
+
+## Project Structure
+
+```
+podcast/           # Source modules
+tests/             # Test files (test_*.py)
+```
+
+Each module in `podcast/` has a corresponding test file in `tests/`.
