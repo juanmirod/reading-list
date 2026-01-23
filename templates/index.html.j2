@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ podcast.title }}</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{{ podcast.title }}</h1>
+            <p>{{ podcast.description }}</p>
+            <a href="feed.xml" class="btn">Subscribe via RSS</a>
+        </div>
+    </header>
+    <main class="container">
+        <section class="episodes">
+            {% for episode in episodes %}
+            <article class="episode">
+                <h2>{{ episode.title }}</h2>
+                <p class="date">{{ episode.pubDate }}</p>
+                <p>{{ episode.description }}</p>
+                <audio controls>
+                    <source src="audio/{{ episode.filename }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; {{ podcast.author }}</p>
+        </div>
+    </footer>
+</body>
+</html>
