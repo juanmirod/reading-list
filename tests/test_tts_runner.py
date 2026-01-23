@@ -96,6 +96,10 @@ def test_run_tts_dry_run_mode(mocker):
     
     args = mock_run.call_args[0][0]
     assert "-d" in args, "run_tts must pass -d flag for dry run mode"
+    
+    # Verify -d doesn't break other flags - voice should still be correct
+    v_index = args.index("-v")
+    assert args[v_index + 1] == "onyx", "-v flag must be followed by voice value, not -d"
 
 def test_move_audio_to_docs(tmp_path):
     """Should move mp3 file to docs/audio/ with new name"""

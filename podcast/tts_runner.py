@@ -10,14 +10,16 @@ def run_tts(text, voice="alloy", tts_dir="tts", dry_run=False):
         f.write(text)
     
     # Run the tts module
-    # Command: python -m tts.tts -v <voice> -o output.mp3 <temp_text_file>
+    # Command: python -m tts.tts [-d] -v <voice> -o output.mp3 <temp_text_file>
     # Note: TTS tool modifies output filename to output_{voice}.mp3
     output_base = "output.mp3"
     output_file = output_base.replace(".mp3", f"_{voice}.mp3")
-    cmd = ["python3", "-m", "tts.tts", "-v", voice, "-o", output_base, temp_text_file]
+    cmd = ["python3", "-m", "tts.tts"]
     
     if dry_run:
-        cmd.insert(4, "-d")  # Insert -d flag after -v voice
+        cmd.append("-d")
+    
+    cmd.extend(["-v", voice, "-o", output_base, temp_text_file])
     
     # We need to make sure we are running from the root where tts/ is a package
     # or add tts_dir to PYTHONPATH
