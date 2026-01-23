@@ -10,9 +10,9 @@ def run_tts(text, voice="alloy", tts_dir="tts"):
         f.write(text)
     
     # Run the tts module
-    # Command: python -m tts.tts -v <voice> <temp_text_file>
-    # Note: the juanmirod/tts tool creates output.mp3 by default
-    cmd = ["python3", "-m", "tts.tts", "-v", voice, temp_text_file]
+    # Command: python -m tts.tts -v <voice> -o output.mp3 <temp_text_file>
+    output_file = "output.mp3"
+    cmd = ["python3", "-m", "tts.tts", "-v", voice, "-o", output_file, temp_text_file]
     
     # We need to make sure we are running from the root where tts/ is a package
     # or add tts_dir to PYTHONPATH
@@ -24,7 +24,6 @@ def run_tts(text, voice="alloy", tts_dir="tts"):
     if os.path.exists(temp_text_file):
         os.remove(temp_text_file)
         
-    output_file = "output.mp3"
     if not os.path.exists(output_file):
         raise FileNotFoundError("TTS tool did not produce output.mp3")
         
