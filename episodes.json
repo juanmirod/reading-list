@@ -1,5 +1,14 @@
 [
   {
+    "title": "Claude's constitution",
+    "description": "read aloud of Claude's new constitution",
+    "filename": "20260124-015220-claude-s-constitution.mp3",
+    "duration": 9056,
+    "filesize": 36224685,
+    "guid": "ef97b5bd-a86a-47b1-941d-f4e24ef11428",
+    "pubDate": "Sat, 24 Jan 2026 01:52:20 +0000"
+  },
+  {
     "title": "Who am I?",
     "description": "An LLM has an existential crysis answering a simple question",
     "filename": "20260123-233753-who-am-i.mp3",

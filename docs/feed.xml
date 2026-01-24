@@ -14,6 +14,21 @@
     <itunes:category text="Technology" />
     
     <item>
+      <title>Claude's constitution</title>
+      <itunes:title>Claude's constitution</itunes:title>
+      <description><![CDATA[read aloud of Claude's new constitution]]></description>
+      <content:encoded><![CDATA[read aloud of Claude's new constitution]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20260124-015220-claude-s-constitution.mp3" 
+        length="36224685" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">ef97b5bd-a86a-47b1-941d-f4e24ef11428</guid>
+      <pubDate>Sat, 24 Jan 2026 01:52:20 +0000</pubDate>
+      <itunes:duration>9056</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    
+    <item>
       <title>Who am I?</title>
       <itunes:title>Who am I?</itunes:title>
       <description><![CDATA[An LLM has an existential crysis answering a simple question]]></description>
