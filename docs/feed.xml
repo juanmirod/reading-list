@@ -14,6 +14,21 @@
     <itunes:category text="Technology" />
     
     <item>
+      <title>The adolescence of technology</title>
+      <itunes:title>The adolescence of technology</itunes:title>
+      <description><![CDATA[Essay by Dario Amodei on the future of AI]]></description>
+      <content:encoded><![CDATA[Essay by Dario Amodei on the future of AI]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20260128-135746-the-adolescence-of-technology.mp3" 
+        length="29091117" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">998985f2-33d0-4457-956f-68d10b232638</guid>
+      <pubDate>Wed, 28 Jan 2026 13:57:46 +0000</pubDate>
+      <itunes:duration>7272</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    
+    <item>
       <title>Claude's constitution</title>
       <itunes:title>Claude's constitution</itunes:title>
       <description><![CDATA[read aloud of Claude's new constitution]]></description>
