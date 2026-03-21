@@ -14,6 +14,21 @@
     <itunes:category text="Technology" />
     
     <item>
+      <title>AI as normal technology</title>
+      <itunes:title>AI as normal technology</itunes:title>
+      <description><![CDATA[paper by Arvind Narayanan & Sayash Kapoor]]></description>
+      <content:encoded><![CDATA[paper by Arvind Narayanan & Sayash Kapoor]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20260321-235605-ai-as-normal-technology.mp3" 
+        length="24310221" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">d55d6602-0af9-4b8b-96a3-56c5c0b4138c</guid>
+      <pubDate>Sat, 21 Mar 2026 23:56:05 +0000</pubDate>
+      <itunes:duration>6077</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    
+    <item>
       <title>The adolescence of technology</title>
       <itunes:title>The adolescence of technology</itunes:title>
       <description><![CDATA[Essay by Dario Amodei on the future of AI]]></description>
