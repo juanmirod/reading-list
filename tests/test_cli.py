@@ -152,3 +152,39 @@ def test_voice_default_depends_on_model(mocker, model, expected_voice):
     main(["--model", model, "-t", "T", "-d", "D", "input.txt"])
 
     assert m_run_tts.call_args[1]["voice"] == expected_voice
+
+
+def test_main_url_uses_metadata_as_prompt_defaults(mocker):
+    """A URL should default title/description to the page metadata"""
+    _mock_pipeline(mocker)
+    mocker.patch("publish.fetch_article",
+                 return_value=("Article text",
+                               {"title": "Page Title", "description": "Page Desc"}))
+    m_get_input = mocker.patch("publish.get_input_text")
+    m_create_ep = mocker.patch("publish.create_episode", return_value={})
+    m_input = mocker.patch("builtins.input", return_value="")
+
+    main(["https://example.com/post"])
+
+    assert m_get_input.call_count == 0
+    assert m_input.call_args_list[0][0][0] == "Episode Title [Page Title]: "
+    assert m_input.call_args_list[1][0][0] == "Episode Description [Page Desc]: "
+    assert m_create_ep.call_args[0][0] == "Page Title"
+    assert m_create_ep.call_args[0][1] == "Page Desc"
+
+
+def test_main_url_flags_override_metadata(mocker):
+    """Explicit -t/-d should win over page metadata"""
+    _mock_pipeline(mocker)
+    mocker.patch("publish.fetch_article",
+                 return_value=("Article text",
+                               {"title": "Page Title", "description": "Page Desc"}))
+    m_create_ep = mocker.patch("publish.create_episode", return_value={})
+    m_input = mocker.patch("builtins.input")
+
+    main(["-t", "My Title", "-d", "My Desc", "-v", "af_heart",
+          "https://example.com/post"])
+
+    assert m_create_ep.call_args[0][0] == "My Title"
+    assert m_create_ep.call_args[0][1] == "My Desc"
+    m_input.assert_not_called()

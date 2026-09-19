@@ -2,7 +2,7 @@ import argparse
 import sys
 import os
 import json
-from podcast.input_handler import get_input_text
+from podcast.input_handler import get_input_text, is_url, fetch_article
 from podcast.episodes import load_episodes, save_episodes, create_episode, generate_filename
 from podcast.tts_runner import run_tts, move_audio_to_docs, get_audio_duration, get_audio_filesize
 from podcast.site_generator import generate_site
@@ -19,7 +19,7 @@ def load_podcast_config(file_path="podcast.json"):
 
 def parse_args(args):
     parser = argparse.ArgumentParser(description="Podcast CLI Uploader")
-    parser.add_argument("file", nargs="?", help="Input text file (optional if using stdin)")
+    parser.add_argument("file", nargs="?", help="Input text file or URL (optional if using stdin)")
     parser.add_argument("-t", "--title", help="Episode title")
     parser.add_argument("-d", "--description", help="Episode description")
     parser.add_argument("-m", "--model", default="kokoro",
@@ -35,8 +35,12 @@ def parse_args(args):
 def main(argv=None):
     args = parse_args(argv if argv is not None else sys.argv[1:])
     
-    # 1. Get input text
-    text = get_input_text(args.file)
+    # 1. Get input text (local file, stdin or URL)
+    source_meta = {}
+    if is_url(args.file):
+        text, source_meta = fetch_article(args.file)
+    else:
+        text = get_input_text(args.file)
     
     # Re-open /dev/tty for interactive input if stdin was a pipe
     if not sys.stdin.isatty():
@@ -49,11 +53,16 @@ def main(argv=None):
     # 2. Get metadata (interactive if not provided)
     title = args.title
     if not title:
-        title = input("Episode Title: ")
-        
+        default = source_meta.get("title", "")
+        prompt = f"Episode Title [{default}]: " if default else "Episode Title: "
+        title = input(prompt).strip() or default
+
     description = args.description
     if not description:
-        description = input("Episode Description: ")
+        default = source_meta.get("description", "")
+        prompt = (f"Episode Description [{default}]: " if default
+                  else "Episode Description: ")
+        description = input(prompt).strip() or default
         
     voice = args.voice
     if not voice:

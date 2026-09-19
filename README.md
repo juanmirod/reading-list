@@ -5,7 +5,7 @@ A TDD-built CLI tool to convert text to speech and publish it as a podcast on Gi
 ## Features
 
 - Converts text to speech using `juanmirod/tts` via OpenRouter (`kokoro` by default, `gemini-flash` and more available).
-- Supports input from files or stdin pipes.
+- Supports input from files, stdin pipes, or URLs (article text only, like reader mode).
 - Interactive or non-interactive metadata entry.
 - Automatically generates a modern HTML homepage and a valid RSS feed.
 - Orchestrates git operations (add, commit, push) to publish to GitHub Pages.
@@ -29,10 +29,18 @@ A TDD-built CLI tool to convert text to speech and publish it as a podcast on Gi
 ./publish input.txt
 ```
 
+### Using URLs
+
+```bash
+./publish https://example.com/article
+```
+
+Only the main article text is read (nav, ads and comments are stripped with `trafilatura`, the Python equivalent of Firefox reader mode). When the page declares them, the title and description are offered as prompt defaults, so pressing Enter accepts them. JS-rendered or paywalled pages may not extract; fetch the text and pipe it instead.
+
 ### Using Pipes
 
 ```bash
-cat article.txt | ./publish --title "My Episode" --voice coral
+cat article.txt | ./publish --title "My Episode" --voice af_heart
 ```
 
 ### Command Line Options
