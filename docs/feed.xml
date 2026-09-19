@@ -5,12 +5,12 @@
     xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>My Podcast</title>
-    <link>https://username.github.io/repo-name</link>
+    <link>https://juanmirod.github.io/reading-list</link>
     <language>en-us</language>
     <itunes:author>Author Name</itunes:author>
     <description>A podcast about things.</description>
     <itunes:type>episodic</itunes:type>
-    <itunes:image href="https://example.com/podcast.png" />
+    <itunes:image href="https://juanmirod.github.io/public/logo_big.png" />
     <itunes:category text="Technology" />
     
     <item>
@@ -19,7 +19,7 @@
       <description><![CDATA[[This is a guest post by Grant Sanderson. This blog post was initially written in a different file format and converted using AI. — T.] A sentiment echoing throughout the mathematics communit…]]></description>
       <content:encoded><![CDATA[[This is a guest post by Grant Sanderson. This blog post was initially written in a different file format and converted using AI. — T.] A sentiment echoing throughout the mathematics communit…]]></content:encoded>
       <enclosure 
-        url="https://username.github.io/repo-name/audio/20260919-220939-if-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it.mp3" 
+        url="https://juanmirod.github.io/reading-list/audio/20260919-220939-if-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it.mp3" 
         length="4117389" 
         type="audio/mpeg" />
       <guid isPermaLink="false">8c6b0905-abed-4a3c-8867-8725b023029d</guid>
@@ -34,7 +34,7 @@
       <description><![CDATA[paper by Arvind Narayanan & Sayash Kapoor]]></description>
       <content:encoded><![CDATA[paper by Arvind Narayanan & Sayash Kapoor]]></content:encoded>
       <enclosure 
-        url="https://username.github.io/repo-name/audio/20260321-235605-ai-as-normal-technology.mp3" 
+        url="https://juanmirod.github.io/reading-list/audio/20260321-235605-ai-as-normal-technology.mp3" 
         length="24310221" 
         type="audio/mpeg" />
       <guid isPermaLink="false">d55d6602-0af9-4b8b-96a3-56c5c0b4138c</guid>
@@ -49,7 +49,7 @@
       <description><![CDATA[Essay by Dario Amodei on the future of AI]]></description>
       <content:encoded><![CDATA[Essay by Dario Amodei on the future of AI]]></content:encoded>
       <enclosure 
-        url="https://username.github.io/repo-name/audio/20260128-135746-the-adolescence-of-technology.mp3" 
+        url="https://juanmirod.github.io/reading-list/audio/20260128-135746-the-adolescence-of-technology.mp3" 
         length="29091117" 
         type="audio/mpeg" />
       <guid isPermaLink="false">998985f2-33d0-4457-956f-68d10b232638</guid>
@@ -64,7 +64,7 @@
       <description><![CDATA[read aloud of Claude's new constitution]]></description>
       <content:encoded><![CDATA[read aloud of Claude's new constitution]]></content:encoded>
       <enclosure 
-        url="https://username.github.io/repo-name/audio/20260124-015220-claude-s-constitution.mp3" 
+        url="https://juanmirod.github.io/reading-list/audio/20260124-015220-claude-s-constitution.mp3" 
         length="36224685" 
         type="audio/mpeg" />
       <guid isPermaLink="false">ef97b5bd-a86a-47b1-941d-f4e24ef11428</guid>
@@ -79,7 +79,7 @@
       <description><![CDATA[An LLM has an existential crysis answering a simple question]]></description>
       <content:encoded><![CDATA[An LLM has an existential crysis answering a simple question]]></content:encoded>
       <enclosure 
-        url="https://username.github.io/repo-name/audio/20260123-233753-who-am-i.mp3" 
+        url="https://juanmirod.github.io/reading-list/audio/20260123-233753-who-am-i.mp3" 
         length="2161005" 
         type="audio/mpeg" />
       <guid isPermaLink="false">a05d43fc-70a4-4d19-8504-12a5d1d2ec0f</guid>
