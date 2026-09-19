@@ -17,6 +17,10 @@ def run_tts(text, voice="af_heart", tts_dir="tts", dry_run=False,
     with open(temp_text_file, "w") as f:
         f.write(text)
 
+    # The tts CLI writes its chunks to tmp/chunks relative to the cwd
+    if not os.path.exists("tmp/chunks"):
+        os.makedirs("tmp/chunks", exist_ok=True)
+
     # Command: python -m tts.tts [-d] [-or --model <model>] -v <voice> -o output.mp3 <temp_text_file>
     # Note: TTS tool modifies output filename to output_{voice}.mp3
     output_base = "output.mp3"

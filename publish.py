@@ -8,6 +8,9 @@ from podcast.tts_runner import run_tts, move_audio_to_docs, get_audio_duration, 
 from podcast.site_generator import generate_site
 from podcast.git_ops import commit_episode
 
+# Default voice per OpenRouter model (see tts/models/openrouter.json)
+DEFAULT_VOICES = {"kokoro": "af_heart", "gemini-flash": "Kore"}
+
 def load_podcast_config(file_path="podcast.json"):
     if not os.path.exists(file_path):
         return {}
@@ -19,7 +22,9 @@ def parse_args(args):
     parser.add_argument("file", nargs="?", help="Input text file (optional if using stdin)")
     parser.add_argument("-t", "--title", help="Episode title")
     parser.add_argument("-d", "--description", help="Episode description")
-    parser.add_argument("-v", "--voice", help="Voice selection")
+    parser.add_argument("-m", "--model", default="kokoro",
+                        help="OpenRouter TTS model (kokoro, gemini-flash, aura-2, ...) [kokoro]")
+    parser.add_argument("-v", "--voice", help="Voice selection (depends on --model, e.g. af_heart, Kore)")
     parser.add_argument("--no-push", dest="push", action="store_false", help="Skip git push")
     parser.add_argument("--no-commit", dest="commit", action="store_false", help="Skip git commit")
     parser.add_argument("--dry-run", dest="dry_run", action="store_true", 
@@ -52,7 +57,8 @@ def main(argv=None):
         
     voice = args.voice
     if not voice:
-        voice = input("Voice (alloy, ash, coral, echo, fable, onyx, nova, sage, shimmer) [alloy]: ") or "alloy"
+        default_voice = DEFAULT_VOICES.get(args.model, "af_heart")
+        voice = input(f"Voice ({args.model}) [{default_voice}]: ") or default_voice
         
     # 3. Load configs
     podcast_config = load_podcast_config()
@@ -63,7 +69,7 @@ def main(argv=None):
         print(f"[DRY RUN] Testing TTS parsing with voice '{voice}'...")
     else:
         print(f"Converting text to speech with voice '{voice}'...")
-    output_mp3 = run_tts(text, voice=voice, dry_run=args.dry_run)
+    output_mp3 = run_tts(text, voice=voice, dry_run=args.dry_run, model=args.model)
     
     # In dry_run mode, skip audio processing and downstream steps
     if args.dry_run:

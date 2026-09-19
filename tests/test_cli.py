@@ -100,3 +100,55 @@ def test_interactive_prompt_title(mocker):
     main(["input.txt"])
     
     assert m_input.call_args_list[0][0][0] == "Episode Title: "
+
+
+def _mock_pipeline(mocker):
+    """Mock all main() dependencies, returning the run_tts mock."""
+    mocker.patch("publish.get_input_text", return_value="Text")
+    mocker.patch("publish.load_podcast_config", return_value={})
+    mocker.patch("publish.load_episodes", return_value=[])
+    m_run_tts = mocker.patch("publish.run_tts", return_value="output.mp3")
+    mocker.patch("publish.get_audio_duration", return_value=100)
+    mocker.patch("publish.get_audio_filesize", return_value=1024)
+    mocker.patch("publish.move_audio_to_docs")
+    mocker.patch("publish.generate_filename")
+    mocker.patch("publish.create_episode")
+    mocker.patch("publish.save_episodes")
+    mocker.patch("publish.generate_site")
+    mocker.patch("publish.commit_episode")
+    return m_run_tts
+
+
+def test_parse_args_with_model():
+    """Should parse --model"""
+    args = parse_args(["--model", "gemini-flash", "input.txt"])
+    assert args.model == "gemini-flash"
+
+
+def test_parse_args_default_model_is_kokoro():
+    """Default OpenRouter model should be kokoro"""
+    args = parse_args(["input.txt"])
+    assert args.model == "kokoro"
+
+
+def test_main_passes_model_to_tts(mocker):
+    """main() should forward --model to run_tts"""
+    m_run_tts = _mock_pipeline(mocker)
+
+    main(["--model", "gemini-flash", "-t", "T", "-d", "D", "-v", "Kore", "input.txt"])
+
+    assert m_run_tts.call_args[1]["model"] == "gemini-flash"
+
+
+@pytest.mark.parametrize("model,expected_voice", [
+    ("kokoro", "af_heart"),
+    ("gemini-flash", "Kore"),
+])
+def test_voice_default_depends_on_model(mocker, model, expected_voice):
+    """Empty voice input should fall back to the model's default voice"""
+    m_run_tts = _mock_pipeline(mocker)
+    mocker.patch("builtins.input", return_value="")
+
+    main(["--model", model, "-t", "T", "-d", "D", "input.txt"])
+
+    assert m_run_tts.call_args[1]["voice"] == expected_voice

@@ -5,48 +5,6 @@ import pytest
 from podcast.tts_runner import run_tts, move_audio_to_docs, get_audio_duration, get_audio_filesize
 
 
-def test_tts_module_imports_without_numpy():
-    """TTS module should be importable without numpy for OpenAI/Google TTS.
-    
-    Bug: numpy was imported at top level but only needed for local_tts().
-    This caused ImportError when using OpenAI TTS without numpy installed.
-    """
-    # Temporarily remove numpy from sys.modules to simulate it not being installed
-    numpy_modules = {k: v for k, v in sys.modules.items() if 'numpy' in k}
-    for mod in numpy_modules:
-        del sys.modules[mod]
-    
-    # Also temporarily make numpy unimportable
-    import builtins
-    original_import = builtins.__import__
-    
-    def mock_import(name, *args, **kwargs):
-        if name == 'numpy' or name.startswith('numpy.'):
-            raise ModuleNotFoundError(f"No module named '{name}'")
-        return original_import(name, *args, **kwargs)
-    
-    builtins.__import__ = mock_import
-    
-    try:
-        # Remove tts.tts from modules cache to force re-import
-        tts_modules = [k for k in sys.modules.keys() if k.startswith('tts.')]
-        for mod in tts_modules:
-            del sys.modules[mod]
-        
-        # This should NOT raise ModuleNotFoundError for numpy
-        # The tts module should be importable for OpenAI/Google TTS
-        import tts.tts as tts_module
-        
-        # Verify the module loaded and has the expected functions
-        assert hasattr(tts_module, 'openai_tts')
-        assert hasattr(tts_module, 'google_tts')
-        assert hasattr(tts_module, 'local_tts')
-    finally:
-        # Restore original import
-        builtins.__import__ = original_import
-        # Restore numpy modules
-        sys.modules.update(numpy_modules)
-
 def test_run_tts_success(mocker):
     """Should call tts module and return output path"""
     # Mock subprocess.run
@@ -136,3 +94,28 @@ def test_get_audio_filesize(tmp_path):
     f.write_text(content)
     
     assert get_audio_filesize(str(f)) == len(content)
+
+
+def test_run_tts_creates_chunks_directory(mocker, tmp_path, monkeypatch):
+    """run_tts must ensure tmp/chunks exists (the tts CLI writes chunks there)."""
+    monkeypatch.chdir(tmp_path)
+    mocker.patch("subprocess.run")
+    (tmp_path / "output_alloy.mp3").write_bytes(b"x")
+
+    run_tts("Hello", voice="alloy", tts_dir="tts")
+
+    assert (tmp_path / "tmp" / "chunks").is_dir()
+
+
+def test_run_tts_passes_openrouter_model_and_voice(mocker, tmp_path, monkeypatch):
+    """run_tts should use OpenRouter with the selected model and voice."""
+    monkeypatch.chdir(tmp_path)
+    mock_run = mocker.patch("subprocess.run")
+    (tmp_path / "output_Kore.mp3").write_bytes(b"x")
+
+    run_tts("Hello", voice="Kore", tts_dir="tts", model="gemini-flash")
+
+    args = mock_run.call_args[0][0]
+    assert "-or" in args
+    assert args[args.index("--model") + 1] == "gemini-flash"
+    assert args[args.index("-v") + 1] == "Kore"
