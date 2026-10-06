@@ -4,14 +4,29 @@
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
-    <title>Reading list</title>
+    <title>My Podcast</title>
     <link>https://juanmirod.github.io/reading-list</link>
     <language>en-us</language>
-    <itunes:author>juanmirod</itunes:author>
-    <description>Articles and papers to listen to</description>
+    <itunes:author>Author Name</itunes:author>
+    <description>A podcast about things.</description>
     <itunes:type>episodic</itunes:type>
-    <itunes:image href="https://juanmirod.github.io/public/img/logo.png" />
+    <itunes:image href="https://juanmirod.github.io/public/logo_big.png" />
     <itunes:category text="Technology" />
+    
+    <item>
+      <title>If math is more than proof, we need to better celebrate the rest of it</title>
+      <itunes:title>If math is more than proof, we need to better celebrate the rest of it</itunes:title>
+      <description><![CDATA[[This is a guest post by Grant Sanderson. This blog post was initially written in a different file format and converted using AI. — T.] A sentiment echoing throughout the mathematics communit…]]></description>
+      <content:encoded><![CDATA[[This is a guest post by Grant Sanderson. This blog post was initially written in a different file format and converted using AI. — T.] A sentiment echoing throughout the mathematics communit…]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20260919-220939-if-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it.mp3" 
+        length="4117389" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">8c6b0905-abed-4a3c-8867-8725b023029d</guid>
+      <pubDate>Sat, 19 Sep 2026 22:09:39 +0000</pubDate>
+      <itunes:duration>1029</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     
     <item>
       <title>AI as normal technology</title>
