@@ -4,14 +4,29 @@
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
-    <title>My Podcast</title>
+    <title>Reading list</title>
     <link>https://juanmirod.github.io/reading-list</link>
     <language>en-us</language>
-    <itunes:author>Author Name</itunes:author>
-    <description>A podcast about things.</description>
+    <itunes:author>juanmirod</itunes:author>
+    <description>Articles and papers to listen to</description>
     <itunes:type>episodic</itunes:type>
     <itunes:image href="https://juanmirod.github.io/public/logo_big.png" />
     <itunes:category text="Technology" />
+    
+    <item>
+      <title>The Edge of Sentience: Introduction (summary)</title>
+      <itunes:title>The Edge of Sentience: Introduction (summary)</itunes:title>
+      <description><![CDATA[An original spoken summary of the introduction and first two chapters of Jonathan Birch's The Edge of Sentience (OUP, 2024).]]></description>
+      <content:encoded><![CDATA[An original spoken summary of the introduction and first two chapters of Jonathan Birch's The Edge of Sentience (OUP, 2024).]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20261006-212248-the-edge-of-sentience-introduction-summary.mp3" 
+        length="3159501" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">6d020cf0-5a88-4edf-893a-deea65a1de28</guid>
+      <pubDate>Tue, 06 Oct 2026 21:22:48 +0000</pubDate>
+      <itunes:duration>789</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     
     <item>
       <title>If math is more than proof, we need to better celebrate the rest of it</title>
