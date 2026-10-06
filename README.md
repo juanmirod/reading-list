@@ -57,6 +57,23 @@ source venv/bin/activate
 pytest
 ```
 
+### Running the Website Locally
+
+To preview the generated website before pushing to GitHub Pages:
+
+```bash
+# From the project root, serve the docs folder
+python -m http.server 8000 -d docs
+```
+
+Then open http://localhost:8000 in your browser.
+
+Alternatively, if you have Node.js installed:
+
+```bash
+npx serve docs
+```
+
 ## GitHub Pages
 
 Enable GitHub Pages in your repository settings:

@@ -10,22 +10,22 @@ todos:
     status: completed
   - id: tdd-episode-metadata
     content: "TDD cycle: Episode metadata - read/write episodes.json, generate GUID, slugify"
-    status: in_progress
+    status: completed
   - id: tdd-site-generation
     content: "TDD cycle: Site generation - render feed.xml and index.html from templates"
-    status: pending
+    status: completed
   - id: tdd-tts-integration
     content: "TDD cycle: TTS integration - call tts module, move audio file"
-    status: pending
+    status: completed
   - id: tdd-git-operations
     content: "TDD cycle: Git operations - add, commit, push"
-    status: pending
+    status: completed
   - id: tdd-cli-integration
     content: "TDD cycle: CLI integration - argparse, interactive prompts, main flow"
-    status: pending
+    status: completed
   - id: wrapper-and-docs
     content: Create publish wrapper script, templates, docs/ structure, README.md
-    status: pending
+    status: completed
 isProject: false
 ---
 
