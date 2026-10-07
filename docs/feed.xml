@@ -14,6 +14,21 @@
     <itunes:category text="Technology" />
     
     <item>
+      <title>Emotion concepts in a large language model</title>
+      <itunes:title>Emotion concepts in a large language model</itunes:title>
+      <description><![CDATA[All modern language models sometimes act like they have emotions. What’s behind these behaviors? Our interpretability team investigates.]]></description>
+      <content:encoded><![CDATA[All modern language models sometimes act like they have emotions. What’s behind these behaviors? Our interpretability team investigates.]]></content:encoded>
+      <enclosure 
+        url="https://juanmirod.github.io/reading-list/audio/20261007-171925-emotion-concepts-in-a-large-language-model.mp3" 
+        length="4910541" 
+        type="audio/mpeg" />
+      <guid isPermaLink="false">4e6588b6-6a38-4b32-a2c2-6f27367a637b</guid>
+      <pubDate>Wed, 07 Oct 2026 17:19:25 +0000</pubDate>
+      <itunes:duration>1227</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    
+    <item>
       <title>The Edge of Sentience: Introduction (summary)</title>
       <itunes:title>The Edge of Sentience: Introduction (summary)</itunes:title>
       <description><![CDATA[An original spoken summary of the introduction and first two chapters of Jonathan Birch's The Edge of Sentience (OUP, 2024).]]></description>
