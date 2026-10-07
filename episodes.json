@@ -1,5 +1,14 @@
 [
   {
+    "title": "Sequoia Ascent 2026 summary",
+    "description": "Summary of my talk at Sequoia Ascent",
+    "filename": "20261007-173504-sequoia-ascent-2026-summary.mp3",
+    "duration": 2388,
+    "filesize": 9553773,
+    "guid": "0db9c644-28d4-482d-939b-d82e7bd95ead",
+    "pubDate": "Wed, 07 Oct 2026 17:35:04 +0000"
+  },
+  {
     "title": "Emotion concepts in a large language model",
     "description": "All modern language models sometimes act like they have emotions. What\u2019s behind these behaviors? Our interpretability team investigates.",
     "filename": "20261007-171925-emotion-concepts-in-a-large-language-model.mp3",
